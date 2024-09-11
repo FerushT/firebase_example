@@ -7,6 +7,7 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -57,61 +58,62 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        key:
-            _formKey, // Verknüpft das Formular mit dem Schlüssel, um Validierung und Zustand zu verwalten.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller:
-                  _emailController, // Verknüpft das E-Mail-Textfeld mit dem Controller.
-              decoration: const InputDecoration(
-                  labelText:
-                      "E-Mail"), // Fügt eine Beschriftung "E-Mail" zum Textfeld hinzu.
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  // Überprüft, ob der Wert null oder leer ist.
-                  return "Bitte geben Sie Ihre E-Mail ein"; // Gibt eine Fehlermeldung zurück, wenn das Feld leer ist.
-                }
-                if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                  // Überprüft das E-Mail-Format mit einem regulären Ausdruck.
-                  return "Bitte geben Sie eine gültige E-Mail-Adresse ein"; // Gibt eine Fehlermeldung zurück, wenn die E-Mail nicht gültig ist.
-                }
-                return null; // Gibt null zurück, wenn das Feld gültig ist.
-              },
-            ),
-            TextFormField(
-              controller:
-                  _passwordController, // Verknüpft das Passwort-Textfeld mit dem Controller.
-              obscureText:
-                  true, // Verbirgt den eingegebenen Text für Passwortfelder.
-              decoration: const InputDecoration(
-                  labelText:
-                      "Passwort"), // Fügt eine Beschriftung "Passwort" zum Textfeld hinzu.
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  // Überprüft, ob der Wert null oder leer ist.
-                  return "Bitte geben Sie Ihr Passwort ein"; // Gibt eine Fehlermeldung zurück, wenn das Feld leer ist.
-                }
-                return null; // Gibt null zurück, wenn das Feld gültig ist.
-              },
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _login,
-              child: const Text("Anmelden"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegistrationScreen()),
-                );
-              },
-              child: const Text("Noch keinen Account? Registrieren"),
-            ),
-          ],
+        child: Form(
+          key:
+              _formKey, // Verknüpft das Formular mit dem Schlüssel, um Validierung und Zustand zu verwalten.
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller:
+                    _emailController, // Verknüpft das E-Mail-Textfeld mit dem Controller.
+                decoration: const InputDecoration(
+                    labelText:
+                        "E-Mail"), // Fügt eine Beschriftung "E-Mail" zum Textfeld hinzu.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    // Überprüft, ob der Wert null oder leer ist.
+                    return "Bitte geben Sie Ihre E-Mail ein"; // Gibt eine Fehlermeldung zurück, wenn das Feld leer ist.
+                  }
+                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                    // Überprüft das E-Mail-Format mit einem regulären Ausdruck.
+                    return "Bitte geben Sie eine gültige E-Mail-Adresse ein"; // Gibt eine Fehlermeldung zurück, wenn die E-Mail nicht gültig ist.
+                  }
+                  return null; // Gibt null zurück, wenn das Feld gültig ist.
+                },
+              ),
+              TextFormField(
+                controller:
+                    _passwordController, // Verknüpft das Passwort-Textfeld mit dem Controller.
+                obscureText:
+                    true, // Verbirgt den eingegebenen Text für Passwortfelder.
+                decoration: const InputDecoration(
+                    labelText:
+                        "Passwort"), // Fügt eine Beschriftung "Passwort" zum Textfeld hinzu.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    // Überprüft, ob der Wert null oder leer ist.
+                    return "Bitte geben Sie Ihr Passwort ein"; // Gibt eine Fehlermeldung zurück, wenn das Feld leer ist.
+                  }
+                  return null; // Gibt null zurück, wenn das Feld gültig ist.
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _login,
+                child: const Text("Anmelden"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
+                },
+                child: const Text("Noch keinen Account? Registrieren"),
+              ),
+            ],
+          ),
         ),
       ),
     );
